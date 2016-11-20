@@ -21,7 +21,7 @@ public class P2_5 {
 	        node.data=input.next();
 	        node.left=null;
 	        node.right=null;
-//			if(node!=null) 					//如果二叉树根结点不为空 
+//			if(node!=null) 					//如果二叉树根结点不为空
 //			{
 				return node;
 //			}

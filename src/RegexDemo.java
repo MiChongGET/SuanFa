@@ -9,10 +9,17 @@ import java.util.Scanner;
 public class RegexDemo {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
-        System.out.println("请输入一个手机号:");
-        String a = s.nextLine();
-//        System.out.println(checkQQ(a));
-        System.out.println(TelNum(a));
+//        System.out.println("请输入一个手机号:");
+//        String a = s.nextLine();
+////        System.out.println(checkQQ(a));
+//        System.out.println(TelNum(a));
+
+        //检测邮箱
+//        System.out.println("请输入一个邮箱：");
+//        String a = s.nextLine();
+//        System.out.println(CheckEmail(a));
+        String s1 = s.nextLine();
+        System.out.println(Add(s1));
     }
 
     public static boolean checkQQ(String s){
@@ -34,13 +41,24 @@ public class RegexDemo {
 //                flag = false;
 //        }
 //        return flag;
-
-
         return s.matches("[0-9]{5,15}");
     }
 
+    //判断手机号
     public static  boolean TelNum(String s){
-
         return s.matches("1[38]\\d{9}");
+    }
+    //邮箱判断：
+    public static boolean CheckEmail(String s){
+        //return s.matches("[a-zA-Z_0-9]+@[a-zA-Z_0-9]{2,6}(\\.[a-zA-Z_0-9]{2,3})");
+        return s.matches("\\w+@\\w{2,6}(\\.\\w{2,3})+");
+    }
+
+    //数字保密
+    public static String Add(String s){
+        String a ="*";
+        String regex = "\\d";
+        return  s.replaceAll(regex,a);
+
     }
 }

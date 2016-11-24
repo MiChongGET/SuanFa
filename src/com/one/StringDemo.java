@@ -1,3 +1,5 @@
+package com.one;
+
 import java.util.Scanner;
 
 /**

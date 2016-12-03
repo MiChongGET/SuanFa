@@ -24,7 +24,7 @@ public class Database {
         while (true) {
             System.out.println("请输入你的选择：");
             System.out.println("0:退出 1:显示list元素 2:添加元素 " +
-                    "\n"+"3:删除元素 4:指定位置添加");
+                    "\n"+"3:删除元素 4:指定位置添加 5:查询元素");
             scanner = new Scanner(System.in);
             mydone(scanner.nextInt());
             System.out.println("---------------------------------------");
@@ -48,6 +48,9 @@ public class Database {
                 break;
             case 4:
                 setList();
+                break;
+            case 5:
+                searchlist();
                 break;
         }
     }
@@ -97,6 +100,16 @@ public class Database {
         }else{
             System.out.println("位置超出范围！！！");
 
+        }
+    }
+
+    public static void searchlist(){
+
+        System.out.println("请输入要查找的位置：");
+        Scanner s = new Scanner(System.in);
+        int num  = s.nextInt();
+        if (num<=list.size()) {
+            System.out.println("第" + num + "元素是：" + list.get(num));
         }
     }
 }

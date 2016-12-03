@@ -1,6 +1,5 @@
 package com.two;
 
-import com.two.Student;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -24,12 +23,15 @@ public class Database {
 
         while (true) {
             System.out.println("请输入你的选择：");
-            System.out.println("0:退出 1:显示list元素 2:添加元素 3:删除元素");
+            System.out.println("0:退出 1:显示list元素 2:添加元素 " +
+                    "\n"+"3:删除元素 4:指定位置添加");
             scanner = new Scanner(System.in);
             mydone(scanner.nextInt());
             System.out.println("---------------------------------------");
         }
     }
+
+    //设置将要进行的动作
     public  static void mydone(int i){
         switch (i){
             case 0:
@@ -43,6 +45,9 @@ public class Database {
                 break;
             case 3:
                 removelist();
+                break;
+            case 4:
+                setList();
                 break;
         }
     }
@@ -59,15 +64,6 @@ public class Database {
         }
     }
 
-
-
-
-    public static <LiuRui> void print(LiuRui lr)
-    {
-        System.out.println(lr);
-
-    }
-
     public static void addlist(){
         System.out.println("输入你的姓名:");
         Scanner scanner1 = new Scanner(System.in);
@@ -78,9 +74,29 @@ public class Database {
         list.add(s4);
     }
 
-    private static void removelist() {
+    public static void removelist() {
         System.out.println("请输入要删除的位置：");
         list.remove(scanner.nextInt());
         arraylist();
+    }
+
+    public static void setList(){
+        System.out.println("请输入你要插入的位置:");
+        Scanner s = new Scanner(System.in);
+        int position = s.nextInt();
+        if (position<list.size()){
+        Scanner s1 = new Scanner(System.in);
+        System.out.println("输入你的姓名:");
+        String name = s1.nextLine();
+
+        System.out.println("请输入你的年龄:");
+        int age  = s1.nextInt();
+
+        Student s5 = new Student(name,age);
+        list.set(position,s5);
+        }else{
+            System.out.println("位置超出范围！！！");
+
+        }
     }
 }

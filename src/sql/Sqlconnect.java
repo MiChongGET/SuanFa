@@ -3,7 +3,6 @@ package sql;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Locale;
 
 /**
  * Created by Administrator on 2016/12/9.

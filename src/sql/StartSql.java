@@ -11,10 +11,9 @@ public class StartSql {
     private static final String dbURL = "jdbc:sqlserver://localhost:1433;DatabaseName=Student";
     private static final String userName = "sa";
     private static final String userPwd = "123";
-    private static boolean flag = true;
+    private static boolean flag = false;
 
-
-
+    //静态代码块
     static {
             try {
                 Class.forName(driverName);
@@ -35,44 +34,11 @@ public class StartSql {
                 e.printStackTrace();
                 System.out.print("SQL Server连接失败！");
             }
-
-//        try {
-//            ArrayList<LoginList> lists = new ArrayList<LoginList>();
-//
-//            Statement statement = dbConn.createStatement();
-//            ResultSet set = null;
-////            set = statement.executeQuery("SELECT * FROM Login");
-////           while (set.next()){
-////
-////              String na = set.getString("name");
-////              String pass = set.getString("passwd");
-////              LoginList loginList = new LoginList(na,pass);
-////              lists.add(loginList);
-////           }
-////
-////            Iterator it = lists.iterator();
-////            while (it.hasNext()){
-////                LoginList login = (LoginList) it.next();
-////                System.out.println("name:"+login.getName()+"passwd"+login.getPasswd());
-////            }
-//
-//            statement.close();
-//            dbConn.close();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
         }
 
-
-
         public static void login(String name,String passwd){
-
-
-
             try {
                 Statement statement = dbConn.createStatement();
-//                String sql = "select passwd from Login WHERE name='"+name+"'";
-
 
                 PreparedStatement ps=dbConn.prepareStatement("select * from Login WHERE name=?");
                 ps.setString(1,name);
@@ -80,8 +46,8 @@ public class StartSql {
 
                 while (set.next()){
 
-//                    System.out.println(set.getString(1));
-//                    System.out.println(set.getString(2));
+//                    System.out.println(set.getString(1));获取第一列的值
+//                    System.out.println(set.getString(2));获取第二列的值
 
                     //去除字符串左右空格
                     String password=set.getString(2).trim();
@@ -89,23 +55,41 @@ public class StartSql {
                     System.out.println(passwd);
                     if (passwd.equals(password)){
                         System.out.println("登录成功！！！");
-                        islogin(true);
+                        flag=true;
+                        //islogin();
                     }else {
                         System.out.println("登录失败！！！");
-                        islogin(false);
+                        flag=false;
+                        //islogin();
                     }
                 }
-
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
-            //return flag;
     }
 
-    public static final boolean islogin(boolean f){
+    //获取登录状态值，登录成功返回true，失败则为false
+    public static boolean islogin(){
+        return flag;
+    }
 
-        return f;
+    //查询学生信息
+    public  void SelectStudent(){
+        try {
+            Statement statement = dbConn.createStatement();
+
+            PreparedStatement ps=dbConn.prepareStatement("select * from Student");
+            ResultSet set = ps.executeQuery();
+
+            while (set.next()){
+                //去除字符串左右空格
+                String studentInfo=set.getString(2).trim();
+                System.out.println(studentInfo);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }
